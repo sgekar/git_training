@@ -3,6 +3,12 @@
 Complex numbers exercises from HackerRank
      https://www.hackerrank.com/challenges/class-1-dealing-with-complex-numbers/submissions/code/163464233
 
+    For this challenge, you are given two complex numbers, and you have to print the result of their addition, subtraction, multiplication, division and modulus operations.
+
+    The real and imaginary precision part should be correct up to two decimal places.
+
+    Input Format
+        One line of input: The real and imaginary part of a number separated by a space.
 
 """
 class Complex(object):
