@@ -21,38 +21,49 @@ class Point(object):
         self.x = x
         self.y = y
         self.z = z
-
+    #
     def vec3d(self,another_point):
-        return self.x - another_point.x, self.y - another_point.y, self.z - another_point.z
-
-    def vec3d_length(self):
+        return Point(self.x - another_point.x, self.y - another_point.y, self.z
+                - another_point.z)
+    #
+    def length(self):
         return math.sqrt(self.x *self.x + self.y*self.y + self.z*self.z)
-
-    def vec3d_dot(self, another_vec):
-        return (math.sqrt(self.x*another_vec.x),math.sqrt(self.y*another_vec.y),\
-                   math.sqrt(self.z*another_vec.z))
-
-    def vec3d_cross(vec3d_A, vec3d_B):
-        return (vec3d_A.y * vec3d_B.z, -(vec3d_A.x * vec3d_B.z), vec3d_A.x *\
+    #
+    def dot(self, another_vec):
+        return math.sqrt(self.x*another_vec.x+self.y*another_vec.y+\
+                   self.z*another_vec.z)
+    #
+    def cross(vec3d_A, vec3d_B):
+        return Point(vec3d_A.y * vec3d_B.z, -(vec3d_A.x * vec3d_B.z), vec3d_A.x *\
                 vec3d_B.y)
+    #
+    def __str__(self):
+        return("{0},{1},{2}".format(self.x,self.y,self.z))
 #
 #
 #
 if __name__== '__main__':
     #
     print('\n\n\nInput 4 points on 4 lines seperate lines, each line in format X Y Z\n')
-    line_in= input()
-    pt_A = line_in.split()
-    line_in= input()
-    pt_B = line_in.split()
-    line_in = input()
-    pt_C = line_in.split()
-    line_in = input()
-    pt_D = line1.split()
+    components = map(float, input().split())
+    pt_A = Point(*components)
+    print(str(pt_A))
+    components = map(float, input().split())
+    pt_B = Point(*components)
+    print(str(pt_B))
+    components = map(float, input().split())
+    pt_C = Point(*components)
+    print(str(pt_C))
+    components = map(float, input().split())
+    pt_D = Point(*components)
+    print(str(pt_D))
     #
-    X = vec3d_cross(vec3d(pt_A,pt_B), vec3d(pt_B,pt_C))
-    Y = vec3d_cross(vec3d(pt_B,pt_C), vec3d(pt_C,pt_D))
-    print('angle = {}'.format(math.acos(vec3d_dot(X,Y) / \
-                                         vec3d_length(X) / vec3d_length(Y))))
+    vec_AB = pt_A.vec3d(pt_B)
+    vec_BC = pt_B.vec3d(pt_C)
+    vec_CD = pt_C.vec3d(pt_D)
+    X = vec_AB.cross(vec_BC)
+    Y = vec_BC.cross(vec_CD)
+    print('angle = {}'.format(180.0*math.acos(X.dot(Y) / \
+                                         X.length() / Y.length()/math.pi)))
 
 #
